@@ -1,1 +1,2 @@
-# git-visualizer
+#git-good 
+A git visualizer
