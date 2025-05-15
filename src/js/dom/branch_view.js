@@ -5,6 +5,12 @@ class BranchView {
         this.name = name
     }
 
+    addCommit(commit) {
+        this.commits.push(commit)
+
+        return commit
+    }
+
     render(parent) {
         this.commits.array.forEach(element => {
            element.render(parent) 

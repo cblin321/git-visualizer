@@ -42,9 +42,12 @@ class PageController {
         }
 
         if (response.type === "ADD_COMMIT") {
-            const newCommit = CommitView()
-            this.map[response.payload.id]  = newCommit
-            this.repo.render(parent) 
+            //assume there's only 1 repo
+            const branch = this.map[response.payload.branchId]
+            const currRepo = this.map[response.payload.repo]
+            const newCommit = currRepo.addCommit(response, branch) 
+            this.map[response.id] = newCommit
+            
         }
 
 

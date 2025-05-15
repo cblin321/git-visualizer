@@ -22,7 +22,7 @@ function loadIntroPage() {
             }
         }
         pageController.update(event, parent).then(() => {
-            
+           //TODO error handling 
         })
     })
 

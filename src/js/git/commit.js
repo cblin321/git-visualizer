@@ -1,6 +1,7 @@
 class Commit {
-    constructor(id) {
-        this.id = id
+    static id = 1
+    constructor() {
+        this.id = id++
     }
 
 }
