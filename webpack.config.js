@@ -1,12 +1,13 @@
-const webpack = require("webpack")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+import webpack from "webpack"
+import path from "path"
+import HtmlWebpackPlugin from "html-webpack-plugin"
 
-module.exports = {
+export default {
     mode: "development",
     entry: "./src/index.js",
     output: {
         filename: "main.js",
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(process.cwd(), "dist"),
         clean: true,
     },
 
@@ -25,6 +26,20 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.(?:js|mjs|cjs)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        // targets: "defaults",
+                        sourceType: "module",
+                        presets: [
+                            ["@babel/preset-env"]
+                        ],
+                    }
+                }
             }
         ]
     }

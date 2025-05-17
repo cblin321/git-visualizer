@@ -27,7 +27,6 @@ function loadIntroPage() {
     })
 
 
-    //TODO have a button on the page that updates the PC
 
     
 

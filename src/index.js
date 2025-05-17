@@ -1,14 +1,16 @@
 //commits, brnaches, merge (merge conflicts), rebase, remotes
-import Router from "./js/dom/router"
-import Broker from "./js/broker"
+import Router from "./js/dom/router.js"
+import Broker from "./js/broker.js"
 
-const Broker = new Broker()
+console.log("hi")
+
+const WebBroker = new Broker()
 
 const routes = ["src/examples/introduction.html"]
 
 const callbacks = []
 
-const Router = Router(routes)
+const PageRouter = new Router(routes)
 
 const navbar = document.createElement("nav")
 
