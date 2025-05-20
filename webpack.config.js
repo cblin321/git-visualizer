@@ -1,6 +1,12 @@
 import webpack from "webpack"
 import path from "path"
+import fs from "fs"
 import HtmlWebpackPlugin from "html-webpack-plugin"
+
+const templatePath = "./src/examples"
+const templateNames = fs.readdirSync(templatePath).filter(file => path.extname(file) === ".html")
+
+const HTMLPlugins = templateNames.map(fp => new HtmlWebpackPlugin({template: path.join(templatePath, fp)}))
 
 export default {
     mode: "development",
@@ -12,14 +18,16 @@ export default {
     },
 
     plugins:  [
+        ...HTMLPlugins,
         new HtmlWebpackPlugin({
-            template: "./src/index.html"
+            template: "./src/index.html",
+            filename: "index.html"
         })
     ],
     
 
     devServer: {
-        watchFiles: ["./src/index.html"]
+        watchFiles: ["./src/index.html", "./src/examples/*.html"]
     },
     module: {
         rules: [
