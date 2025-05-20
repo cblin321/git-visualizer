@@ -1,24 +1,26 @@
-import Commit from "./commit"
-import Branch from "./branch"
+import Commit from "./commit.js"
+import Branch from "./branch.js"
 class Repo {
-      /**
-       * 
-       * @param {*} branches 
-       * @param {*} head expected to be an obj of format {"commit" : commit, "branch": branch}
-       */
-     constructor(branches, head) {
-        this.head = head
-        this.branches = branches
-     }
+   /**
+    * Initializes a backend repo obj
+    * @param {Object} options object of parameters for intializing repo, check src for more
+    */
+   constructor(options) {
+      //head is a node, and branches is branches 
+      if (this.head && this.branches) {
+         this.head = options.head
+         this.branches = options.branches
+      }
 
-     constructor(commits) {
-        this.head = commits[commits.length - 1]
-        this.branches = [new Branch(null, commits, "main")]
-     }
-        
-     constructor() {
-        this.head = null
-        this.branches = [new Branch(null, [], "main")]
+      //provided a list of commits
+      if (options.commits) {
+         this.head = options.commits[options.commits.length - 1]
+         this.branches = [new Branch(null, options.commits, "main")]
+      }
+
+      //provide nothing/invalid options
+      this.head = null
+      this.branches = [new Branch(null, [], "main")]
      }
 
      /**

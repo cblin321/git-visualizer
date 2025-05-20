@@ -1,5 +1,5 @@
-import CommitView from "./dom/commit_view"
-import Formatter from "./formatter"
+import CommitView from "./dom/commit_view.js"
+import Formatter from "./formatter.js"
 //class to recieve events from the dom & emit events to the broker  
 //dom is updated by signals backend which gives info to update dom
 class PageController {

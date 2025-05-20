@@ -1,8 +1,7 @@
-import Commit from "../git/commit"
-import PageController from "../page_controller";
-import Repo from "../git/repo"
-import { Broker } from "../..";
-import PageController from "../page_controller";
+import Commit from "../git/commit.js"
+import PageController from "../page_controller.js";
+import Repo from "../git/repo.js"
+import {WebBroker} from "../../index.js";
 //TODO brief git intro, intro to commits
 function loadIntroPage() {
 
@@ -33,3 +32,5 @@ function loadIntroPage() {
     
 
 }
+
+export default loadIntroPage
