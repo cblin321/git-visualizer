@@ -4,18 +4,19 @@ class Router {
         this.routes = routes
     }
 
-    get(uri, callback) {
+    get(uri) {
         //add DOMContent loaded to document, redirect, then run relevant JS fcn
-        const execCallback = () => {
-            callback()
-        }
+        // const execCallback = () => {
+        //     callback()
+        // }
 
+        window.location.assign(uri)
+        // execCallback()
         document.addEventListener("DOMContentLoaded", () => {
-            execCallback()
+            console.log("fjdsklfsjdlkfjkls")
             document.removeEventListener("DOMContentLoaded", execCallback)
         })
 
-        window.location.assign(uri)
     }
 
 // document.addEventListener('DOMContentLoaded', () => {

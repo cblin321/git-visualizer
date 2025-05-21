@@ -1,16 +1,18 @@
 import Commit from "../git/commit.js"
 import PageController from "../page_controller.js";
 import Repo from "../git/repo.js"
-import {WebBroker} from "../../index.js";
+import Broker from "../broker.js";
 //TODO brief git intro, intro to commits
-function loadIntroPage() {
 
+const WebBroker = new Broker()
     let commitId = 1;
-    const pageController = new PageController(Broker)
+    const pageController = new PageController(WebBroker)
 
     const playground = document.createElement("div")
 
     const addBtn = document.createElement("button")
+    addBtn.text = "Add Commit"
+
 
     addBtn.addEventListener("click", () => {
         const event = {
@@ -25,12 +27,9 @@ function loadIntroPage() {
         })
     })
 
+    document.body.appendChild(addBtn)
 
+console.log("running intro")    
 
     
 
-    
-
-}
-
-export default loadIntroPage

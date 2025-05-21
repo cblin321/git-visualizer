@@ -6,13 +6,32 @@ import HtmlWebpackPlugin from "html-webpack-plugin"
 const templatePath = "./src/examples"
 const templateNames = fs.readdirSync(templatePath).filter(file => path.extname(file) === ".html")
 
-const HTMLPlugins = templateNames.map(fp => new HtmlWebpackPlugin({template: path.join(templatePath, fp)}))
+const HTMLPlugins = templateNames.map(fp => {
+    console.log(path.parse(fp).name)
+    return new HtmlWebpackPlugin({template: path.join(templatePath, fp), 
+    filename: path.join("examples", fp),
+    chunks: [path.parse(fp).name]
+})
+})
+
+const entries = {}
+
+const pageNames = fs.readdirSync("./src/js/pages").filter(file => path.extname(file) === ".js")
+
+for (let i of pageNames) {
+    entries[path.parse(i).name] = "./" + path.join("./src/js/pages", i)
+}
+
+console.log(entries)
 
 export default {
     mode: "development",
-    entry: "./src/index.js",
+    entry: {
+        index: "./src/index.js",
+        ...entries
+    },
     output: {
-        filename: "main.js",
+        filename: "[name].js",
         path: path.resolve(process.cwd(), "dist"),
         clean: true,
     },
@@ -21,7 +40,8 @@ export default {
         ...HTMLPlugins,
         new HtmlWebpackPlugin({
             template: "./src/index.html",
-            filename: "index.html"
+            filename: "index.html",
+            chunks: ["index"]
         })
     ],
     
