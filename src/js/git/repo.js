@@ -7,7 +7,7 @@ class Repo {
     */
    constructor(options) {
       //head is a node, and branches is branches 
-      if (this.head && this.branches) {
+      if (options.head && options.branches) {
          this.head = options.head
          this.branches = options.branches
       }
@@ -23,19 +23,19 @@ class Repo {
       this.branches = [new Branch(null, [], "main")]
      }
 
+   getHeadBranch() {
+      return this.head ? this.branches.filter(branch => branch.contains(head)) : this.branches[0]
+   }
+
      /**
       * 
       * @param {*} event should have nothing in the payload
       */
-     addCommit(event) {
+     addCommit() {
          const newCommit = new Commit()
-         this.head.branch.addCommit()
-         this.head.commit = newCommit
-         const payload = {
-            "commit_id": newCommit.id,
-            "branch_id": this.head.branch.id
-         }
-         return [newCommit, payload]
+         this.getHeadBranch().addCommit(newCommit)
+         this.head = newCommit
+         return newCommit
      }
 
 }

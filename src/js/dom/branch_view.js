@@ -1,8 +1,9 @@
 class BranchView {
-    constructor(commits, id, name) {
-        this.commits = branches
-        this.id = id
+    constructor(commits, name) {
+        this.commits = commits
+        // this.id = id
         this.name = name
+        this.element = document.createElement("div")
     }
 
     addCommit(commit) {
@@ -12,9 +13,10 @@ class BranchView {
     }
 
     render(parent) {
-        this.commits.array.forEach(element => {
-           element.render(parent) 
+        this.commits.forEach(element => {
+           element.render(this.element) 
         });
+        this.element.appendChild(parent)
     }
 }
 

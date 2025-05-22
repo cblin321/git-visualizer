@@ -1,4 +1,4 @@
-import CommitView from "./commit_view"
+import CommitView from "./commit_view.js"
 class RepoView {
     constructor(branches, head) {
         this.branches = branches
@@ -12,14 +12,15 @@ class RepoView {
 
         branch.addCommit(newCommit)
 
-        this.head.toggleHead()
+        if (this.head)
+            this.head.toggleHead()
         this.head = newCommit
         
         return newCommit
     }
     
     render(parent) {
-        this.branches.array.forEach(element => {
+        this.branches.forEach(element => {
            element.render(parent) 
         });
     }

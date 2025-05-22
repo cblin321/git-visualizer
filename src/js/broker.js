@@ -1,8 +1,7 @@
 class Broker {
-    constructor(consumers, producers) {
-
-        this.consumers = consumers
-        this.producers = producers
+    constructor(options) {
+            this.consumers = options.consumers ? options.consumers : []
+            this.producers = options.producers ? options.producers: []
 
     }
 
@@ -23,20 +22,22 @@ class Broker {
     }
 
     signalProducers(event) {
-        this.producers.forEach(element => {
-            element.signal(event)
+        return this.producers.map(element => {
+            return element.signal(event)
         });
     }
 
     signalConsumers(event) {
-        this.consumers.forEach(element => {
-            element.signal(event)
+        return this.consumers.map(element => {
+            return element.signal(event)
         });
     }
 
-   async signal(event) {
-
-        return new Promise((resolve) => resolve(signalProducers)) 
+   signal(event) {
+        // return new Promise((resolve) => resolve(signalProducers)) 
+        if (event.source === "producer")
+            return this.signalConsumers(event)
+        return this.signalProducers(event)
     }
 }
 

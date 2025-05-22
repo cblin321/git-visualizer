@@ -2,34 +2,59 @@ import Commit from "../git/commit.js"
 import PageController from "../page_controller.js";
 import Repo from "../git/repo.js"
 import Broker from "../broker.js";
+import GitController from "../git_controller.js";
 //TODO brief git intro, intro to commits
 
-const WebBroker = new Broker()
-    let commitId = 1;
-    const pageController = new PageController(WebBroker)
 
-    const playground = document.createElement("div")
+let commitId = 1;
 
-    const addBtn = document.createElement("button")
-    addBtn.text = "Add Commit"
+const webBroker = new Broker({})
+
+const pageController = new PageController(webBroker, {})
+
+const gitController = new GitController(webBroker)
+
+webBroker.addConsumer(gitController)
+webBroker.addProducer(pageController)
+
+const playground = document.createElement("div")
+
+const initBtn = document.createElement("button")
+initBtn.textContent = "Init Repo"
 
 
-    addBtn.addEventListener("click", () => {
-        const event = {
-            type: "INIT_REPO",
-            source: "producer",
-            payload: {
-                id: 1
-            }
+initBtn.addEventListener("click", (e) => {
+    const event = {
+        type: "INIT_REPO",
+        source: "producer",
+        payload: {
+            id: 1
         }
-        pageController.update(event, parent).then(() => {
-           //TODO error handling 
-        })
-    })
+    }
 
-    document.body.appendChild(addBtn)
+
+    pageController.update(event, playground)
+})
+
+document.body.appendChild(initBtn)
+
+const addBtn = document.createElement("button")
+
+addBtn.textContent = "Add Commit"
+addBtn.addEventListener("click", () => {
+    const event = {
+        type: "ADD_COMMIT",
+        source: "producer",
+        payload: {            
+
+        }
+    }
+    pageController.update(event, playground)
+})
+
+document.body.appendChild(addBtn)
 
 console.log("running intro")    
 
-    
+
 

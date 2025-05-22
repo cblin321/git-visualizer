@@ -5,6 +5,14 @@ class Branch{
         this.commits = commits
         this.name = name
     }
+
+    contains(commit) {
+        return this.commits.includes(commit)
+    }
+
+    addCommit(commit) {
+        this.commits.push(commit)
+    }
         
 }
 

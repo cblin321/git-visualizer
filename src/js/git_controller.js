@@ -1,4 +1,4 @@
-import Repo from "./git/repo"
+import Repo from "./git/repo.js"
 //interfaces with the broker to signal/update the backend
 class GitController {
     constructor(broker) {
@@ -7,8 +7,9 @@ class GitController {
     }
 
     async update(event) {
-        const response = await this.broker.signal(event)
+        // const response = await this.broker.signal(event)
 
+        console.log("update backend")
         //TODO make relevant updates
     }
 
@@ -31,16 +32,21 @@ class GitController {
                 id: "repo"
             }
 
-            this.repo = new Repo()
+            this.repo = new Repo({})
         }
 
         if (event.type === "ADD_COMMIT") {
-            const [newCommit, commitPayload] = this.repo.addCommit(event)
-            this.map.newCommit.id = newCommit
-            
-            payload = commitPayload 
-        }
+            const newCommit = this.repo.addCommit()
 
+            const branch = this.repo.branches.filter(branch => branch.contains(newCommit))[0]
+
+            this.map[`commit${newCommit.id}`] = newCommit
+            payload = {
+                "commit_id": newCommit.commitId,
+                "branch_name": branch.name
+            }
+        }
+        console.log("signal backend")
         toSend["payload"] = payload
         return toSend
     }
