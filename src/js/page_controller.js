@@ -28,7 +28,8 @@ class PageController {
 
          if (event.type == "ADD_COMMIT") {
             const payload = {
-                commit: event.payload.commit
+                commit: event.payload.commit,
+                name: event.payload.name
             }
             toSend.payload = payload
             

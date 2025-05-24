@@ -40,19 +40,25 @@ document.body.appendChild(initBtn)
 
 const addBtn = document.createElement("button")
 
+const term = document.createElement("input")
+
 addBtn.textContent = "Add Commit"
 addBtn.addEventListener("click", () => {
+    const cmd_toks = term.value.split(" ")
+    console.log(cmd_toks)
     const event = {
         type: "ADD_COMMIT",
         source: "producer",
         payload: {            
-            parent: playground
+            parent: playground,
+            name: cmd_toks[2] //this is rlly a commit msg, but messed up the naming convention
         }
     }
     pageController.update(event, playground)
 })
 
 document.body.appendChild(addBtn)
+document.body.appendChild(term)
 document.body.appendChild(playground)
 
 console.log("running intro")    

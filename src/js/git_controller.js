@@ -20,6 +20,7 @@ class GitController {
      */
     signal(event) {
         //
+        console.log(event)
         const toSend = {
             type: event.type,
             source: "consumer",
@@ -43,6 +44,7 @@ class GitController {
             this.map[`commit${newCommit.id}`] = newCommit
             payload = {
                 "commit_id": newCommit.commitId,
+                "commit_name": event.payload.name,
                 "branch_name": branch.name
             }
         }

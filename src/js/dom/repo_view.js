@@ -7,8 +7,9 @@ class RepoView {
 
     addCommit(event, branch) {
         //find relevant branch, add commit
-        
-        const newCommit = new CommitView(event.payload.name, event.payload.id, true)
+        console.log(event)
+        console.log(event.payload.commit_name) 
+        const newCommit = new CommitView(event.payload.commit_name, event.payload.id, true)
 
         branch.addCommit(newCommit)
 
