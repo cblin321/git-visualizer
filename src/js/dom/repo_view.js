@@ -20,6 +20,7 @@ class RepoView {
     }
     
     render(parent) {
+        console.log("render repo")
         this.branches.forEach(element => {
            element.render(parent) 
         });

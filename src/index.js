@@ -5,7 +5,7 @@ import Broker from "./js/broker.js"
 
 console.log("hi")
 
-const WebBroker = new Broker()
+const WebBroker = new Broker({})
 
 // const routes = ["src/examples/introduction.html"]
  const routes = ["examples/introduction.html"]

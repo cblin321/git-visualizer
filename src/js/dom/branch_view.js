@@ -8,7 +8,7 @@ class BranchView {
 
     addCommit(commit) {
         this.commits.push(commit)
-
+        commit.render(this.element)
         return commit
     }
 
@@ -16,7 +16,7 @@ class BranchView {
         this.commits.forEach(element => {
            element.render(this.element) 
         });
-        this.element.appendChild(parent)
+        parent.appendChild(this.element)
     }
 }
 

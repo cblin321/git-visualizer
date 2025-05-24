@@ -46,13 +46,14 @@ addBtn.addEventListener("click", () => {
         type: "ADD_COMMIT",
         source: "producer",
         payload: {            
-
+            parent: playground
         }
     }
     pageController.update(event, playground)
 })
 
 document.body.appendChild(addBtn)
+document.body.appendChild(playground)
 
 console.log("running intro")    
 

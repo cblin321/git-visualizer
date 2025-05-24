@@ -52,8 +52,8 @@ class PageController {
             const branch = this.map[`branch-${response.payload.branch_name}`]
             const newCommit = this.repo.addCommit(response, branch) 
             this.map[`commit-${response.payload["commit_id"]}`] = newCommit
-            //console.log(this.map)
-            newCommit.render(parent)
+            console.log(this.repo)
+            //this.repo.render(event.payload.parent)
         }
 
 

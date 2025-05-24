@@ -24,7 +24,7 @@ class Repo {
      }
 
    getHeadBranch() {
-      return this.head ? this.branches.filter(branch => branch.contains(head)) : this.branches[0]
+      return this.head ? this.branches.filter(branch => branch.contains(this.head))[0] : this.branches[0]
    }
 
      /**
